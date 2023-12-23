@@ -22,12 +22,33 @@ pipeline {
 
 
    }
+   stage('upload aws ECR') {
+            steps {
+                script{
+                    // cleanup current user docker credentials
+                    sh 'rm -f ~/.dockercfg ~/.docker/config.json || true'
+                    
+                   
+                    docker.withRegistry("https://${ECR_PATH}", "ecr:${REGION}:${ecrAccesskey}") {
+                      docker.image("${username}/jenkins:${currentBuild.number}").push()
+                      docker.image("${password}/jenkins:latest").push()
+                    }
+
+                }
+            }
+            post {
+                success {
+                    echo 'success upload image'
+                }
+                failure {
+                    error 'fail upload image' // exit pipeline
+                }
+            }
+        }
 
    post {
        success {
-           script {
-               sh 'docker rmi $(docker images -q)'
-           }
+      
            echo 'Docker image build, login, push, and local image cleanup successful!'
        }
 
