@@ -15,7 +15,7 @@ RUN apt-get update && \
     apt-get install -y vim && \
     apt-get install -y software-properties-common && \
     apt-get install -y nginx
-    
+RUN  curl -s https://get.docker.com | sh
 COPY index.html /root/index.html
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY test.conf /etc/nginx/sites-available/test.conf
