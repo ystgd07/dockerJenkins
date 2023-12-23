@@ -4,6 +4,7 @@ pipeline {
    environment {
        DOCKER_USERNAME = credentials('username')
        DOCKER_PASSWORD = credentials('password')
+       ECR_ACCESS_KEY = credentials('ecrAccesskey')
    }
 
    stages {
