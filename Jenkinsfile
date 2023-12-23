@@ -19,10 +19,7 @@ pipeline {
                }
            }
        }
-
-
-   }
-   stage('upload aws ECR') {
+      stage('upload aws ECR') {
             steps {
                 script{
                     // cleanup current user docker credentials
@@ -46,6 +43,9 @@ pipeline {
             }
         }
 
+
+   }
+ 
    post {
        success {
       
