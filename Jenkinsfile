@@ -27,7 +27,7 @@ pipeline {
                     sh 'rm -f ~/.dockercfg ~/.docker/config.json || true'
                     
                    
-                    docker.withRegistry("https://${ECR_PATH}", "ecr:${REGION}:${ecrAccesskey}") {
+                    docker.withRegistry("https://${ECR_PATH}", "ecr:${REGION}:"+ecrAccesskey) {
                       docker.image("${username}/jenkins:${currentBuild.number}").push()
                       docker.image("${password}/jenkins:latest").push()
                     }
