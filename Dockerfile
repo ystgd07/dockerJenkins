@@ -15,7 +15,16 @@ RUN apt-get update && \
     apt-get install -y vim && \
     apt-get install -y software-properties-common && \
     apt-get install -y nginx
-    
-COPY index.html /root/index.html
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY index.html /root/index.html
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY test.conf /etc/nginx/sites-available/test.conf
+RUN rm -rf /etc/nginx/sites-enabled/default
+RUN rm -rf /etc/nginx/sites-available/default
+RUN chmod +x /root && \
+    chmod +x /root/index.html
+RUN ln -s /etc/nginx/sites-available/test.conf /etc/nginx/sites-enabled
+RUN chmod +x /etc/nginx/sites-enabled
+CMD ["/usr/sbin/init"]
+ENTRYPOINT service nginx start && bash
+
