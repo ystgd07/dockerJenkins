@@ -5,6 +5,9 @@ pipeline {
        DOCKER_USERNAME = credentials('username')
        DOCKER_PASSWORD = credentials('password')
        ECR_ACCESS_KEY = credentials('ecrAccesskey')
+       ECR_PATH = 'public.ecr.aws/k3f1h3u2/btc3-ecr'
+       IMAGE_NAME = 'public.ecr.aws/k3f1h3u2/btc3-ecr/yangsungsoo'
+       REGION = 'ap-northeast-2'
    }
 
    stages {
@@ -16,10 +19,12 @@ pipeline {
                                     string(credentialsId: 'password', variable: 'DOCKER_PASSWORD')]) {
                        sh "docker build -t $DOCKER_USERNAME/jenkins:${currentBuild.number} ."
                        sh "docker build -t $DOCKER_USERNAME/jenkins:latest ."
+                       sh "docker tag $DOCKER_USERNAME:jenkins $DOCKER_USERNAME:latest"
                    }
                }
            }
        }
+      
       stage('upload aws ECR') {
             steps {
                 script{
