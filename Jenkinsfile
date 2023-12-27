@@ -6,8 +6,7 @@ pipeline {
        app = '' 
   }
   agent any
-  def now = new Date()
-  def IMAGE_VERSION = now.format("yyyyMMddHHmm")
+
   stages { 
       stage('Building our image') { 
           steps { 
