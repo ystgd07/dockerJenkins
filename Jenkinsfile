@@ -20,7 +20,7 @@ pipeline {
                 script{
                      sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/k3f1h3u2/btc3-ecr"
                      sh "docker tag $repository:${currentBuild.number} public.ecr.aws/k3f1h3u2/btc3-ecr"
-                     sh "docker push public.ecr.aws/k3f1h3u2/btc3-ecr"
+                     sh "docker push public.ecr.aws/k3f1h3u2/btc3-ecr/yangsungsoo"
                     }
                 }
             }
