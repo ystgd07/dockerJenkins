@@ -2,7 +2,7 @@ pipeline {
     environment { 
         repository = "btc3yssrepo"  
         dockerImage = ''
-       registry = 'public.ecr.aws/k3f1h3u2/btc3-ecr'
+       registry = 'public.ecr.aws/k3f1h3u2/btc3yssrepo'
        app = '' 
   }
   agent any
@@ -19,10 +19,8 @@ pipeline {
             steps {
                 script{
                      sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/k3f1h3u2/$repository"
-                     sh "docker tag $repository:${currentBuild.number} public.ecr.aws/k3f1h3u2/$repository:${currentBuild.number}"
-                     sh "docker tag $repository:36 public.ecr.aws/k3f1h3u2/$repository:36"
-                     sh "docker push public.ecr.aws/k3f1h3u2/$repository:${currentBuild.number}"
-                     sh "docker push public.ecr.aws/k3f1h3u2/$repository:36"
+                     sh "docker tag $repository:${currentBuild.number} $registry:$BUILD_NUMBER"
+                     sh "docker push public.ecr.aws/k3f1h3u2/$repository:$BUILD_NUMBER"
                     }
                 }
             }
