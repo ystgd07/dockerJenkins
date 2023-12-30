@@ -8,7 +8,6 @@ image:
   repository: public.ecr.aws/k3f1h3u2/btc3yssrepo
   tag: latest
   pullPolicy: Always
-  command: ['sh', '-c', 'echo 'xxx && sleep 6000']
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
