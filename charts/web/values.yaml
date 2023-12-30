@@ -44,7 +44,7 @@ service:
   type: NodePort
   port: 80
   targetPort: 80
-  nodePort: 32644
+  nodePort: 32642
 
 ingress:
   enabled: false
