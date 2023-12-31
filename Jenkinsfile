@@ -39,6 +39,9 @@ pipeline {
                         sed -i "s/tag:.*/tag: $BUILD_NUMBER/g" ./charts/web/values.yaml
                         git add .
                         git commit -m "Update yaml file $BUILD_NUMBER"
+                        git branch -M master
+                        git remote remove origin
+                        git remote add origin https://github.com/ystgd07/dockerJenkins.git
                         git push -u origin master
                         """
                     }
