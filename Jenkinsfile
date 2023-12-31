@@ -29,5 +29,19 @@ pipeline {
               sh "docker rmi $repository:$BUILD_NUMBER" 
           }
       } 
+      stage('Git Clone and Modify yaml') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'ystdgd07', usernameVariable: 'username', passwordVariable: 'password')]) {
+                        sh """
+                        git config user.email "ysotgood@gmail.com"
+                        git config user.name "yangsungsoo"
+                        git add .
+                        git commit -m "Update yaml file"
+                        """
+                    }
+                }
+            }
+        }
   }
 }
