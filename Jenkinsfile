@@ -36,9 +36,10 @@ pipeline {
                         sh """
                         git config user.email "ysotgood@gmail.com"
                         git config user.name "yangsungsoo"
-                        mkdir test1
+                        sed -i "s/tag:.*/tag: $BUILD_NUMBER/g" ./charts/web/values.yaml
                         git add .
-                        git commit -m "Update yaml file"
+                        git commit -m "Update yaml file $BUILD_NUMBER"
+                        git push -u origin master
                         """
                     }
                 }
