@@ -36,7 +36,7 @@ pipeline {
                         sh """
                         git config user.email "ysotgood@gmail.com"
                         git config user.name "yangsungsoo"
-                        mkidr test1
+                        mkdir test1
                         git add .
                         git commit -m "Update yaml file"
                         """
