@@ -38,7 +38,6 @@ pipeline {
                         git config user.email "ysotgood@gmail.com"
                         git config user.name "yangsungsoo"
                         sed -i "s/tag:.*/tag: $BUILD_NUMBER/g" ./charts/web/values.yaml
-                        git log --pretty=oneline
                         git remote set-url origin https://$username:$password@github.com/ystgd07/argorepo.git
                         git add ./charts/web/values.yaml
                         git commit -m "Update yaml file $BUILD_NUMBER"
