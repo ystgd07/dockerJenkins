@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   repository: public.ecr.aws/k3f1h3u2/btc3yssrepo
-  tag: 102
+  tag: 113
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 102
+  tag: 113
 
 imagePullSecrets: []
 nameOverride: ""
