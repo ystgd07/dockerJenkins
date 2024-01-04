@@ -34,12 +34,17 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'ystdgd07', usernameVariable: 'username', passwordVariable: 'password')]) {
                         sh """
+                        git init
                         git config user.email "ysotgood@gmail.com"
-                        git config user.name "yangsungsoo"
+                        git config user.name "yangsungsoo"                        
                         sed -i "s/tag:.*/tag: $BUILD_NUMBER/g" ./charts/web/values.yaml
+                        git log --pretty=oneline
+                        git remote set-url origin https://$username:$password@github.com/ystgd07/argorepo.git
+                        git pull origin master
                         git add .
                         git commit -m "Update yaml file $BUILD_NUMBER"
-                        git push -u origin master
+                        git remote -v
+                        git push -u origin +master
                         """
                     }
                 }
