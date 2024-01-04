@@ -41,7 +41,7 @@ pipeline {
                         sed -i "s/tag:.*/tag: $BUILD_NUMBER/g" ./charts/web/values.yaml
                         git log --pretty=oneline
                         git remote set-url origin https://$username:$password@github.com/ystgd07/argorepo.git
-                        git add .
+                        git add ./charts/web/values.yaml
                         git commit -m "Update yaml file $BUILD_NUMBER"
                         git remote -v
                         git push -u origin +master
