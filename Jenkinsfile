@@ -32,13 +32,14 @@ pipeline {
       stage('Git Clone and Modify yaml') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'ystdgd07', usernameVariable: 'username', passwordVariable: 'password')]) {
+                   sshagent (credentials: ['jenkins-ssh']) {
                         sh """
-                        git init
-                        git config user.email "ysotgood@gmail.com"
-                        git config user.name "yangsungsoo"
+                        git config --global user.email "ysotgood@gmail.com"
+                        git config --global user.name "yangsungsoo"
+                        rm -rf argorepo
+                        git clone git@github.com:ystgd07/argorepo.git
+                        cd ./argorepo
                         sed -i "s/tag:.*/tag: $BUILD_NUMBER/g" ./charts/web/values.yaml
-                        git remote set-url origin https://$username:$password@github.com/ystgd07/argorepo.git
                         git add ./charts/web/values.yaml
                         git commit -m "Update yaml file $BUILD_NUMBER"
                         git remote -v
